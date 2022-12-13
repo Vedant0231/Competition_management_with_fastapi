@@ -1,3 +1,5 @@
+#to excute your code, run this main file
+
 import uvicorn
 import os
 from dotenv import load_dotenv

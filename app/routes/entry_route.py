@@ -7,11 +7,13 @@ from typing import List
 
 entry = APIRouter()
 
+#get all entry 
 @entry.get("/entry",tags=['entry'],response_model=List[CreateEntry])
 def allentry(db:Session = Depends(get_db)):
     db_entry = db.query(Entry_Table).all()
     return db_entry
 
+#create new entry
 @entry.post("/entryadd",tags=['entry'],response_model= CreateEntry)
 def addentry(request:CreateEntry , db:Session = Depends(get_db)):
     new_entry = Entry_Table(id = request.id , title = request.title , topic = request.topic , state = request.state , country = request.country , competition_id = request.competition_id )
@@ -20,13 +22,14 @@ def addentry(request:CreateEntry , db:Session = Depends(get_db)):
     db.refresh(new_entry)
     return new_entry
 
-
+# update entry by id
 @entry.put("/updateentry/{id}",tags=['entry'])
 def updateentry(id,request:CreateEntry , db:Session = Depends(get_db)):
     db.query(Entry_Table).filter(Entry_Table.id == id).update(request.dict())
     db.commit()
     return "done"
 
+# delete entry by id
 @entry.delete("/entrydelete/{id}",tags=['entry'])
 def deleteentry(id, db:Session = Depends(get_db)):
     db.query(Entry_Table).filter(Entry_Table.id == id).delete(synchronize_session=False)

@@ -1,3 +1,5 @@
+#all require packets for this program
+
 alembic==1.8.1
 anyio==3.6.2
 click==8.1.3

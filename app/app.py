@@ -1,3 +1,5 @@
+#import all routes 
+
 from fastapi import FastAPI
 from app.routes.competition_route import competition
 from app.routes.entry_route import entry
