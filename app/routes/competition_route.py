@@ -21,7 +21,7 @@ def showusersbyname(name,db:Session = Depends(get_db)):
 
 @competition.post("/competitionadd",tags=['competition'],response_model= CreateCompetition)
 def addcompetition(request:CreateCompetition , db:Session = Depends(get_db)):
-    new_competition = Competition(name = request.name ,description = request.description ,user_id = request.user_id, status = request.status )
+    new_competition = Competition(name = request.name ,description = request.description ,user_id = request.user_id, status = request.status  )
     db.add(new_competition)
     db.commit()
     db.refresh(new_competition)
