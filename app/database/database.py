@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "postgresql://[username]:[password]@[localhost]/[database_name]"
+SQLALCHEMY_DATABASE_URL = "postgresql://postgres:vedant@localhost:5432/task1db"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL
@@ -17,4 +17,4 @@ def get_db():
     try:
         yield db
     finally:
-        db.close()   
+        db.close()

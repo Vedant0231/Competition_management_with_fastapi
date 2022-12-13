@@ -1,13 +1,14 @@
 from fastapi import APIRouter , Depends
-from app.database.database import get_db , engine ,SessionLocal 
+from app.database.database import get_db , engine ,SessionLocal
 from app.schemas.entry_schema import *
 from app.models.entry_model import Entry_Table
+from app.models.competition_model import Competition
 from sqlalchemy.orm import Session
-from typing import List 
+from typing import List
 
 entry = APIRouter()
 
-#Get all entry 
+#Get all entry
 @entry.get("/entry",tags=['entry'],response_model=List[CreateEntry])
 def allentry(db:Session = Depends(get_db)):
     db_entry = db.query(Entry_Table).all()
@@ -34,4 +35,17 @@ def updateentry(id,request:CreateEntry , db:Session = Depends(get_db)):
 def deleteentry(id, db:Session = Depends(get_db)):
     db.query(Entry_Table).filter(Entry_Table.id == id).delete(synchronize_session=False)
     db.commit()
-    return "done"        
+    return "done"
+
+
+@entry.get('/entry/{user_id}/count')
+def count_user(user_id, db: Session = Depends(get_db)):
+    competitions = db.query(Competition.id).filter(Competition.user_id == user_id).all()
+
+    competitions = [competition.id for competition in competitions]
+
+    result = 0
+    for competition in competitions:
+        entry = (db.query(Entry_Table.id).filter(Entry_Table.competition_id == competition).count())
+        result += entry
+    return result
