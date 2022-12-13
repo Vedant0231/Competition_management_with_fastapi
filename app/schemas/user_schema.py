@@ -3,7 +3,7 @@ from typing import Optional
 from datetime import date
 
 
-#demo schema for developer to unserstand the structure of user table
+#Demo schema for developer to unserstand the structure of user table
 class Users(BaseModel):
     id: int
     name: str
@@ -15,14 +15,14 @@ class Users(BaseModel):
     is_delete: bool
  
 
-#schema to take input   
+#Schema to take input   
 class CreateUsers(BaseModel):
     name:Optional[str]=None
     birth_date:Optional[date] = Field(default_factory=date(2022 , 12 , 12))
     gender:Optional[str]
 
 
-# schema for response
+#Schema for response
 class DisplayUsers(BaseModel):
     id:int
     name:str

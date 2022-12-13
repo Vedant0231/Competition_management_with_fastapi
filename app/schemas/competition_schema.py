@@ -3,7 +3,7 @@ from datetime import date
 from typing import Optional
 
 
-#demo schema for developer to unserstand the structure of competition table
+#Demo schema for developer to unserstand the structure of competition table
 class Competitions(BaseModel):
     id: int
     name: str
@@ -16,7 +16,7 @@ class Competitions(BaseModel):
     user_id: int
 
 
-#schema to take input and show the response 
+#Schema to take input and show the response 
 class CreateCompetition(BaseModel):
     id:int
     name:str

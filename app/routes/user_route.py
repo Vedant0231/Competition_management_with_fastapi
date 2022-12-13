@@ -7,19 +7,19 @@ from typing import List
 
 userdata = APIRouter()
 
-#get all user details
+#Get all user details
 @userdata.get("/user",tags=['users'],response_model=List[DisplayUsers])
 def alluser(db:Session = Depends(get_db)):
     db_users = db.query(User).all()
     return db_users
 
-#get user details by name
+#Get user details by name
 @userdata.get("/users/{name}",tags=['users'],response_model=DisplayUsers)
 def showusersbyname(name,db:Session = Depends(get_db)):
     db_users = db.query(User).filter(User.name == name).first()
     return db_users  
 
-#create new user
+#Create new user
 @userdata.post("/useradd",tags=['users'], response_model=DisplayUsers)
 def addusers(request:CreateUsers , db:Session = Depends(get_db)):
     new_users = User(name = request.name, birth_date = request.birth_date, gender = request.gender)
@@ -28,14 +28,14 @@ def addusers(request:CreateUsers , db:Session = Depends(get_db)):
     db.refresh(new_users)
     return new_users
 
-#update user details by name
+#Update user details by name
 @userdata.put("/updateusers/{name}",tags=['users'])
 def updateusers(name,request:CreateUsers , db:Session = Depends(get_db)):
     db.query(User).filter(User.name == name).update(request.dict())
     db.commit()
     return "done"
 
-#delete user details by name
+#Delete user details by name
 @userdata.delete("/usersdelete/{name}",tags=['users'])
 def users4(name, db:Session = Depends(get_db)):
     db.query(User).filter(User.name == name).delete(synchronize_session=False)

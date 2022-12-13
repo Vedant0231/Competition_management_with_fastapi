@@ -1,4 +1,4 @@
-#all require packets for this program
+#All require packets for this program
 
 alembic==1.8.1
 anyio==3.6.2
@@ -23,3 +23,4 @@ SQLAlchemy==1.4.44
 starlette==0.22.0
 typing_extensions==4.4.0
 uvicorn==0.20.0
+pre-commit

@@ -2,7 +2,7 @@ from app.database.database import Base
 from sqlalchemy import Column , Integer , String  , DateTime , Boolean , ForeignKey
 from app.models.user_model import User
 from datetime import datetime
-#model for competition table
+#Model for competition table
 
 class Competition(Base):
     __tablename__ = "competition_table"
