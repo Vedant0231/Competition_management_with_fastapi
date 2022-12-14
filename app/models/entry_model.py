@@ -4,6 +4,7 @@ from app.models.competition_model import Competition
 from datetime import datetime
 #Model for entry table
 
+
 class Entry_Table(Base):
     __tablename__ = "entry_table"
     id = Column(Integer, primary_key = True,index = True)
@@ -15,4 +16,3 @@ class Entry_Table(Base):
     created_at = Column(DateTime, default= datetime.utcnow)
     updated_at = Column(DateTime, default= datetime.utcnow)
     competition_id = Column(Integer , ForeignKey(Competition.id))
- 
